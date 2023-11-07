@@ -1,4 +1,10 @@
+import { useState } from "react";
+
 const SignUp = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
       <div className="bg-white p-3 rounded w-25">
@@ -15,6 +21,7 @@ const SignUp = () => {
               autoComplete="off"
               name="name"
               className="form-control rounded-0"
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -27,6 +34,7 @@ const SignUp = () => {
               autoComplete="off"
               name="email"
               className="form-control rounded 0"
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -39,19 +47,21 @@ const SignUp = () => {
               autoComplete="off"
               name="password"
               className="form-control rounded-0"
+              onChange={(event) => setPassword(event.target.value)}
             />
           </div>
           <button type="submit" className="btn btn-success w-100 rounded-0">
             Register
           </button>
-          <p>Already have an Account?</p>
-          <button
-            type="submit"
-            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
-          >
-            Login
-          </button>
         </form>
+
+        <p className="text-center">Already have an Account?</p>
+        <button
+          type="submit"
+          className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
+        >
+          Login
+        </button>
       </div>
     </div>
   );
