@@ -6,12 +6,21 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    await axios
+      .post("http://localhost:8080/login", { email, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
       <div className="bg-white p-3 rounded w-25">
         <h2>Welcome back! Login</h2>
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="mb-3">
             <label htmlFor="email">
               <strong>Email</strong>
