@@ -1,18 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     await axios
       .post("http://localhost:8080/login", { email, password })
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
+      .then((result) => {
+        if (result.data === "Success") {
+          navigate("/home");
+          console.log(result.data);
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -28,7 +34,6 @@ const Login = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              autoComplete="off"
               name="email"
               className="form-control rounded 0"
               onChange={(event) => setEmail(event.target.value)}
@@ -41,7 +46,6 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter your password"
-              autoComplete="off"
               name="password"
               className="form-control rounded-0"
               onChange={(event) => setPassword(event.target.value)}
@@ -54,7 +58,7 @@ const Login = () => {
 
         <p className="text-center">Don&apos;t have an account?</p>
         <Link
-          to="/register"
+          to="/"
           type="submit"
           className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
         >
